@@ -1,248 +1,864 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Perfume Website</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="https://kit.fontawesome.com/f30fac2c61.js" crossorigin="anonymous"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Perfume Website</title>
+
+  <!-- FontAwesome -->
+  <script src="https://kit.fontawesome.com/f30fac2c61.js" crossorigin="anonymous"></script>
+
+  <style>
+    /* ================== Global Fonts ================== */
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Allura&family=Poppins:wght@500&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+
+    :root {
+      --primary-black: #000000;
+      --secondary-black: #101010;
+      --primary-white: #FFFFFF;
+      --secondary-white: #F0F0F0;
+      --primary-pink:  #EFC3C5;
+      --primary-pista: #E2F2B0;
+    }
+
+    /* ================== Main Layout ================== */
+    .main-container {
+      min-height: 100vh;
+      background-color: var(--primary-black);
+      isolation: isolate;
+      position: relative;
+    }
+
+    .main-container::before {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 30vh;
+      z-index: -1;
+      bottom: 0;
+      background-color: var(--primary-black);
+    }
+
+    .circle {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: var(--primary-white);
+      width: 20rem;
+      height: 25rem;
+      border-radius: 50%;
+      filter: blur(100px);
+      z-index: -2;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1300px;
+      margin: auto;
+      height: 100vh;
+      padding: 0 2rem 0;
+    }
+
+    /* ================== Header & Nav ================== */
+    header {
+      height: 14vh;
+    }
+
+    .logo {
+      color: var(--secondary-white);
+      height: 7rem;
+      font-size: 3rem;
+      margin-top: 50px;
+      margin-left: 50px;
+    }
+
+    .navbar {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 22px;
+      position: relative;
+    }
+
+    .nav-list {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      margin-left: 10px;
+      margin-top: 8px;
+    }
+
+    .nav-links {
+      color: var(--secondary-white);
+      font-size: 1rem;
+      margin-left: 20px;
+      text-decoration: none;
+    }
+
+    .nav-links:hover,
+    .active {
+      cursor: pointer;
+      color: var(--primary-pink);
+    }
+
+    li {
+      list-style: none;
+    }
+
+    /* ================== Hamburger ================== */
+    .hamburger {
+      display: none;
+      cursor: pointer;
+    }
+
+    .line {
+      width: 2.2rem;
+      height: 0.2rem;
+      margin: 0.35rem;
+      background-color: var(--primary-white);
+    }
+
+    /* ================== Hero Section ================== */
+    .hero-section {
+      height: calc(100vh - 14vh);
+      display: flex;
+      justify-content: center;
+    }
+
+    .left-container h1 {
+      color: var(--primary-white);
+      font-size: 4.1rem;
+      margin-top: 10rem;
+    }
+
+    .middle-container img {
+      display: flex;
+      justify-content: space-evenly;
+      height: 95%;
+    }
+
+    .right-container {
+      align-self: flex-end;
+      margin-bottom: 7rem;
+      color: white;
+      line-height: 1.7rem;
+    }
+
+    .para {
+      font-size: 1rem;
+      color: var(--primary-white);
+      line-height: 1.7rem;
+      padding: 1rem 0 2.5rem 0;
+    }
+
+    [data-type="border-para"] {
+      border-right: 0.5rem solid var(--primary-pista);
+      text-align: end;
+      padding-right: 1.8rem;
+    }
+
+    /* ================== Slider ================== */
+    .scroll-container {
+      background-color: var(--primary-black);
+      white-space: nowrap;
+      overflow-x: hidden;
+      padding: 2rem 0;
+    }
+
+    .scroll {
+      display: inline-block;
+      animation: 10s scroll infinite linear;
+    }
+
+    .scroll-container h2 {
+      color: var(--primary-white);
+      font-size: 4rem;
+      font-family: "Allura", cursive;
+      display: inline-block;
+      margin: 0 2rem;
+    }
+
+    .break {
+      width: 2rem;
+      height: 2rem;
+      background: var(--primary-pista);
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    @keyframes scroll {
+      from {
+        transform: translateX(0);
+      }
+      to {
+        transform: translateX(-100%);
+      }
+    }
+
+    /* ================== Story Section ================== */
+    .story {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: var(--secondary-black);
+    }
+
+    .product-container img {
+      height: 40rem;
+      padding: 4rem;
+    }
+
+    .content h2 {
+      font-family: "Allura", cursive;
+      font-size: 3rem;
+      color: var(--primary-pista);
+    }
+
+    .content button {
+      margin-top: 1rem;
+      height: 30px;
+      width: 100px;
+      color: black;
+      font-size: 0.9rem;
+      background-color: var(--primary-pista);
+      border: none;
+      cursor: pointer;
+    }
+
+    .content {
+      margin-inline: 22px;
+      color: var(--primary-white);
+      padding: 6rem;
+    }
+
+    /* ================== Best Selling Products ================== */
+    .selling {
+      background-color: var(--primary-black);
+    }
+
+    .selling-product h2 {
+      font-family: "Allura", cursive !important;
+      text-align: center;
+      padding: 3rem;
+      font-size: 4rem;
+      color: var(--primary-pista);
+    }
+
+    .grid-card {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      padding: 0rem 15rem 0 15rem;
+    }
+
+    .card {
+      height: 350px;
+      border: 0.5px solid var(--primary-pista);
+      margin-bottom: 2rem;
+      margin-inline: 50px;
+      background-color: var(--secondary-black);
+      transition-duration: 1s;
+    }
+
+    .card:hover {
+      transform: scale(1.1);
+    }
+
+    .card-product img {
+      height: 200px;
+      width: 200px;
+    }
+
+    .card-info {
+      color: var(--primary-white);
+      text-align: center;
+      font-size: 1.4rem;
+      width: 100% !important;
+      padding-bottom: 1rem;
+    }
+
+    .spare {
+      width: 100%;
+      height: 30px;
+      font-size: 0.9rem;
+      background-color: var(--primary-pista);
+      border: none;
+      cursor: pointer;
+    }
+
+    /* ================== Our Services ================== */
+    .services h2 {
+      font-family: "Allura", cursive !important;
+      text-align: center;
+      padding: 3rem;
+      font-size: 4rem;
+      color: var(--primary-pista);
+    }
+
+    .services-panel {
+      margin-bottom: 3rem;
+    }
+
+    .service-card {
+      width: 17rem;
+      background-color: var(--primary-black);
+      margin-inline: 10px;
+      border: none;
+      position: relative;
+      isolation: isolate;
+    }
+
+    .service-info {
+      padding-top: 2rem;
+    }
+
+    .service-info h4 {
+      padding: 1rem;
+    }
+
+    .service-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 0.3rem;
+      background: var(--primary-pista);
+      z-index: -1;
+      transition: 0.3s all;
+    }
+
+    .service-card:hover::before {
+      height: 100%;
+    }
+
+    .service-info:hover {
+      color: var(--primary-black);
+    }
+
+    /* ================== Sale Section ================== */
+    .sale {
+      display: flex;
+      width: 100%;
+      height: 30rem;
+    }
+
+    .sale-img img {
+      height: 250px;
+      margin-left: 5rem;
+    }
+
+    .sale-text {
+      margin-left: 15rem;
+      margin-top: 1rem;
+      margin-right: 5rem;
+    }
+
+    .sale-text h6 {
+      color: var(--primary-pink);
+      font-size: 1.5rem;
+    }
+
+    .sale-text h3 {
+      color: var(--primary-white);
+      font-size: 2.5rem;
+    }
+
+    .sale-btn {
+      margin-top: 1rem;
+      height: 32px;
+      width: 100px;
+      background-color: var(--primary-pista);
+      border: none;
+      cursor: pointer;
+    }
+
+    .celebrate {
+      position: relative;
+      isolation: isolate;
+    }
+
+    .glow1,
+    .glow2 {
+      position: absolute;
+      width: 30rem;
+      height: 15rem;
+      border-radius: 50%;
+      filter: blur(120px);
+      z-index: -1;
+    }
+
+    .glow1 {
+      top: 0px;
+      left: 150px;
+      background: orangered;
+    }
+
+    .glow2 {
+      bottom: 240px;
+      right: 170px;
+      background: blue;
+    }
+
+    /* ================== Gallery ================== */
+    .gallery-text h2 {
+      color: var(--primary-pista);
+      text-align: center;
+      margin-bottom: 4rem;
+      font-size: 4rem;
+      font-family: "Allura", cursive;
+    }
+
+    .gallery {
+      display: flex;
+      flex-direction: column;
+      padding: 0 28rem 0 28rem;
+    }
+
+    .gallery-row {
+      display: flex;
+      justify-content: space-around;
+      width: 100%;
+      margin-bottom: 7px;
+    }
+
+    .gallery-card {
+      border: none;
+      height: 250px;
+      width: 150px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .gallery-card img {
+      width: 100%;
+      height: 100%;
+    }
+
+    /* ================== Responsive Media Queries ================== */
+    @media (max-width: 1024px) {
+      .container {
+        padding: 0 1rem;
+      }
+      .grid-card {
+        padding: 0 5rem;
+      }
+      .gallery {
+        padding: 0 5rem;
+      }
+      .hero-section {
+        flex-direction: column;
+        align-items: center;
+      }
+      .left-container h1 {
+        font-size: 3rem;
+        margin-top: 5rem;
+        text-align: center;
+      }
+      .middle-container img {
+        height: 60%;
+      }
+      .right-container {
+        margin-bottom: 3rem;
+        padding: 0 1rem;
+        text-align: center;
+      }
+    }
+
+    @media (max-width: 768px) {
+      header {
+        height: auto;
+      }
+      .navbar {
+        flex-direction: column;
+      }
+      /* Hide nav options when hamburger appears */
+      .nav-list {
+        display: none;
+      }
+      .hamburger {
+        display: block;
+        position: absolute;
+        top: 20px;
+        right: 20px;
+      }
+      .left-container h1 {
+        font-size: 2.5rem;
+        margin-top: 3rem;
+      }
+      .middle-container img {
+        height: 50%;
+        margin: 1rem 0;
+      }
+      /* Hide the text and green line on mobile */
+      .right-container p[data-type="border-para"] {
+        display: none;
+      }
+      .right-container {
+        margin-bottom: 2rem;
+        font-size: 0.9rem;
+        padding: 0 1rem;
+      }
+      /* "Our Little Story" section in column layout */
+      .story {
+        flex-direction: column;
+        align-items: center;
+      }
+      .product-container img {
+        height: 25rem;
+        padding: 2rem;
+      }
+      .content {
+        padding: 2rem;
+        margin-inline: 1rem;
+      }
+      .grid-card {
+        flex-direction: column;
+        align-items: center;
+        padding: 0 1rem;
+      }
+      .card {
+        margin: 1rem 0;
+      }
+      .sale {
+        flex-direction: column;
+        height: auto;
+        padding: 2rem 0;
+      }
+      .sale-img img {
+        /* Shorten the sale image width and center it */
+        width: 80%;
+        height: auto;
+        margin: 0 auto;
+      }
+      .sale-text {
+        margin: 1rem auto;
+        text-align: center;
+      }
+      .gallery {
+        flex-direction: column;
+        padding: 0 1rem;
+      }
+      /* Hide glows on mobile to remove red/blue block */
+      .glow1
+      {
+        display: none;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .logo {
+        font-size: 2rem;
+        margin-left: 10px;
+      }
+      .nav-links {
+        font-size: 0.9rem;
+        margin-left: 10px;
+      }
+      .left-container h1 {
+        font-size: 2rem;
+        margin-top: 2rem;
+      }
+      .middle-container img {
+        height: 40%;
+      }
+      .right-container {
+        font-size: 0.8rem;
+        margin-bottom: 1rem;
+      }
+      .scroll-container h2 {
+        font-size: 2.5rem;
+        margin: 0 1rem;
+      }
+      .gallery-text h2 {
+        font-size: 2.5rem;
+      }
+      /* Adjust gallery to have 2 images per row */
+      .gallery-row {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.5rem;
+        margin-bottom: 1rem;
+      }
+    }
+  </style>
 </head>
-
 <body>
-    <div class="main-container">
-        <div class="circle"></div>
+  <div class="main-container">
+    <div class="circle"></div>
+    <div class="container">
+      <header>
+        <nav class="navbar">
+          <div class="logo">
+            <i class="fa-solid fa-spray-can-sparkles"></i>
+          </div>
+          <ul class="nav-list">
+            <li><a href="#" class="nav-links active">Home</a></li>
+            <li><a href="#" class="nav-links">Perfume</a></li>
+            <li><a href="#" class="nav-links">Deodarant</a></li>
+            <li><a href="#" class="nav-links">Body Spray</a></li>
+            <li><a href="#" class="nav-links">Attar</a></li>
+          </ul>
+          <div class="hamburger" id="hamburger">
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+          </div>
+        </nav>
+      </header>
 
-        <div class="container">
-            <header>
-                <nav class="navbar">
-                    <div class="logo"><i class="fa-solid fa-spray-can-sparkles"></i></div>
-                    <ul class="nav-list">
-                        <li><a href="#" class="nav-links active">Home </a></li>
-                        <li><a href="#" class="nav-links">Perfume </a></li>
-                        <li><a href="#" class="nav-links">Deodarant </a></li>
-                        <li><a href="#" class="nav-links">Body Spray </a></li>
-                        <li><a href="#" class="nav-links">Attar </a></li>
-                    </ul>
-                    <div class="hamburger">
-                        <div class="line"></div>
-                        <div class="line"></div>
-                        <div class="line"></div>
-                    </div>
-                </nav>
-            </header>
-
-
-            <div class="hero-section">
-                <div class="left-container">
-                    <h1>THE FRAGRANCE OF LIFE</h1>
-                </div>
-                <div class="middle-container">
-                    <img src="images/perfume.png" alt="">
-                </div>
-                <div class="right-container">
-                    <p data-type="border-para">Perfume: a silent symphony, weaving stories in the air, invoking memories
-                        of love, passion, and dreams, lingering long after the wearer has departed.</p>
-                </div>
-            </div>
+      <div class="hero-section">
+        <div class="left-container">
+          <h1>THE FRAGRANCE OF LIFE</h1>
         </div>
+        <div class="middle-container">
+          <img src="images/perfume.png" alt="Perfume Bottle" />
+        </div>
+        <div class="right-container">
+          <!-- This paragraph and its border are hidden on mobile -->
+          <p data-type="border-para">
+            Perfume: a silent symphony, weaving stories in the air, invoking
+            memories of love, passion, and dreams, lingering long after the
+            wearer has departed.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slider -->
+  <div class="scroll-container">
+    <div class="scroll">
+      <h2>25%</h2>
+      <h2>Discount</h2>
+      <div class="break"></div>
+    </div>
+    <div class="scroll">
+      <h2>25%</h2>
+      <h2>Discount</h2>
+      <div class="break"></div>
+    </div>
+    <div class="scroll">
+      <h2>25%</h2>
+      <h2>Discount</h2>
+      <div class="break"></div>
+    </div>
+    <div class="scroll">
+      <h2>25%</h2>
+      <h2>Discount</h2>
+      <div class="break"></div>
+    </div>
+  </div>
+
+  <!-- Our Little Story -->
+  <div class="section">
+    <div class="story">
+      <div class="product-container">
+        <img src="images/perfume1.png" alt="Perfume" />
+      </div>
+      <div class="content">
+        <h2>Our Little Story</h2>
+        <p>
+          Born from passion in the heart of the city, our perfume brand weaves
+          tales of romance and adventure with each scent. With ingredients
+          sourced globally, our commitment to quality remains steadfast. From
+          love found to dreams pursued, our perfumes evoke cherished memories
+          and ignite imaginations. Welcome to our fragrant world, where every
+          bottle carries a piece of our soul and endless inspiration. Embrace
+          the journey, and let our scents transport you to unforgettable
+          realms.
+        </p>
+        <a href="#"><button class="card-btn">Read More</button></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Best Selling Products -->
+  <div class="selling">
+    <div class="selling-product">
+      <h2>Best Selling Products</h2>
+    </div>
+    <div class="grid-card">
+      <div class="card">
+        <div class="card-product">
+          <img src="images/perfume2.png" alt="Perfume" />
+        </div>
+        <div class="card-info">
+          <h4>Perfume</h4>
+          <p>$20.00</p>
+          <a href="#"><button class="cart-btn spare">Add to Cart</button></a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-product">
+          <img src="images/perfume3.png" alt="Perfume" />
+        </div>
+        <div class="card-info">
+          <h4>Perfume</h4>
+          <p>$20.00</p>
+          <a href="#"><button class="cart-btn spare">Add to Cart</button></a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-product">
+          <img src="images/perfume4.png" alt="Perfume" />
+        </div>
+        <div class="card-info">
+          <h4>Perfume</h4>
+          <p>$20.00</p>
+          <a href="#"><button class="cart-btn spare">Add to Cart</button></a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-product">
+          <img src="images/perfume5.png" alt="Perfume" />
+        </div>
+        <div class="card-info">
+          <h4>Per</h4>
+          <p>$20.00</p>
+          <a href="#"><button class="card-btn spare">Add to Cart</button></a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-product">
+          <img src="images/perfume6.png" alt="Perfume" />
+        </div>
+        <div class="card-info">
+          <h4>Perfume</h4>
+          <p>$20.00</p>
+          <a href="#"><button class="spare">Add to Cart</button></a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-product">
+          <img src="images/perfume7.png" alt="Perfume" />
+        </div>
+        <div class="card-info">
+          <h4>Perf</h4>
+          <p>$20.00</p>
+          <a href="#"><button class="spare">Add to Cart</button></a>
+        </div>
+      </div>
     </div>
 
-    <!--slider-->
-    <div class="scroll-container">
-        <div class="scroll">
-            <h2>25%</h2>
-            <h2>Discount</h2>
-            <div class="break"></div>
+    <!-- Our Services -->
+    <div class="services-panel">
+      <div class="services">
+        <h2>Our Services</h2>
+      </div>
+      <div class="grid-card serve-card">
+        <div class="card service-card">
+          <div class="card-info service-info">
+            <h4><u>Free Shipping</u></h4>
+            <p>
+              We deliver free perfumes all over India. Let us serve you once;
+              we are sure you will not regret it.
+            </p>
+          </div>
         </div>
-        <div class="scroll">
-            <h2>25%</h2>
-            <h2>Discount</h2>
-            <div class="break"></div>
+        <div class="card service-card">
+          <div class="card-info service-info">
+            <h4><u>Eco-Friendly</u></h4>
+            <p>
+              Our scents, attars, and other products are eco-friendly and
+              designed keeping in mind the needs of natural resources in the
+              future.
+            </p>
+          </div>
         </div>
-        <div class="scroll">
-            <h2>25%</h2>
-            <h2>Discount</h2>
-            <div class="break"></div>
+        <div class="card service-card">
+          <div class="card-info service-info">
+            <h4><u>Best Services</u></h4>
+            <p>
+              We are India's leading perfume supplier brand. We are the first
+              who developed Eco-Friendly perfumes.
+            </p>
+          </div>
         </div>
-        <div class="scroll">
-            <h2>25%</h2>
-            <h2>Discount</h2>
-            <div class="break"></div>
-        </div>
-    </div>
-    <div class="section">
-        <div class="story">
-            <div class="product-container">
-                <img src="images/perfume1.png" alt="">
-            </div>
-            <div class="content">
-                <h2>Our Little Story</h2>
-                <p>Born from passion in the heart of the city, our perfume brand weaves<br> tales of romance and
-                    adventure with each scent. With ingredients<br> sourced globally, our commitment to quality remains
-                    steadfast.<br> From love found to dreams pursued, our perfumes evoke cherished<br> memories and
-                    ignite imaginations. Welcome to our fragrant world,<br> where every bottle carries a piece of our
-                    soul and endless inspiration.<br>Embrace the journey, and let our scents transport you to
-                    unforgettable<br> realms.</p>
-                <a href="#"><button class="card-btn">Read More</button></a>
-            </div>
-        </div>
+      </div>
     </div>
 
-    <div class="selling">
-        <div class="selling-product">
-            <h2>Best Selling Products</h2>
+    <!-- Sale Section -->
+    <div class="sale celebrate">
+      <div class="glow1"></div>
+      <div class="glow2"></div>
+      <div class="sale-img">
+        <img src="images/sale perfume.png" alt="Sale Perfume" />
+      </div>
+      <div class="sale-text">
+        <h6>Celebrate Day Sale</h6>
+        <h3>Save 25% Off On All Items Collection</h3>
+        <a href="#"><button class="sale-btn">Shop Now</button></a>
+      </div>
+    </div>
+
+    <!-- Gallery Section -->
+    <div class="gallery-text">
+      <h2>Gallery</h2>
+    </div>
+    <div class="gallery">
+      <div class="gallery-row">
+        <div class="gallery-card">
+          <img src="images/gallery1.jpg" alt="Gallery 1" />
         </div>
-        <div class="grid-card">
-            <div class="card">
-                <div class="card-product">
-                    <img src="/images/perfume2.png" alt="">
-                </div>
-                <div class="card-info">
-                    <h4>Perfume</h4>
-                    <p>$20.00</p>
-                    <a href="#"><button class="cart-btn spare">Add to Cart</button></a>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-product">
-                    <img src="/images/perfume3.png" alt="">
-                </div>
-                <div class="card-info">
-                    <h4>Perfume</h4>
-                    <p>$20.00</p>
-                    <a href="#"><button class="cart-btn spare">Add to Cart</button></a>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-product">
-                    <img src="/images/perfume4.png" alt="">
-                </div>
-                <div class="card-info">
-                    <h4>Perfume</h4>
-                    <p>$20.00</p>
-                    <a href="#"><button class="cart-btn spare">Add to Cart</button></a>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-product">
-                    <img src="/images/perfume5.png" alt="">
-                </div>
-                <div class="card-info">
-                    <h4>Per</h4>
-                    <p>$20.00</p>
-                    <a href="#"><button class="card-btn spare">Add to Cart</button></a>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-product">
-                    <img src="/images/perfume6.png" alt="">
-                </div>
-                <div class="card-info">
-                    <h4>Perfume</h4>
-                    <p>$20.00</p>
-
-                    <a href="#"><button class="spare">Add to Cart</button></a>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-product">
-                    <img src="/images/perfume7.png" alt="">
-                </div>
-                <div class="card-info">
-                    <h4>Perf</h4>
-                    <p>$20.00</p>
-                    <a href="#"><button class="spare">Add to Cart</button></a>
-                </div>
-            </div>
+        <div class="gallery-card">
+          <img src="images/gallery2.jpg" alt="Gallery 2" />
         </div>
+        <div class="gallery-card">
+          <img src="images/gallery3.jpg" alt="Gallery 3" />
+        </div>
+        <div class="gallery-card">
+          <img src="images/gallery4.jpg" alt="Gallery 4" />
+        </div>
+      </div>
+      <div class="gallery-row">
+        <div class="gallery-card">
+          <img src="images/gallery5.jpg" alt="Gallery 5" />
+        </div>
+        <div class="gallery-card">
+          <img src="images/gallery6.jpg" alt="Gallery 6" />
+        </div>
+        <div class="gallery-card">
+          <img src="images/gallery7.jpg" alt="Gallery 7" />
+        </div>
+        <div class="gallery-card">
+          <img src="images/gallery8.jpg" alt="Gallery 8" />
+        </div>
+      </div>
+    </div>
+  </div>
 
-        <div class="services-panel">
-            <div class="services">
-                <h2>Our Services</h2>
-            </div>
-            <div class="grid-card serve-card">
-                <div class="card service-card">
-                    <div class="card-info service-info">
-                        <h4><u>Free Shipping</u></h4>
-                        <p>We deliever free perfumes all over the india .let us serve you for once .we are sure you will
-                            not regret</p>
-                    </div>
-                </div>
-                <div class="card service-card">
-                    <div class="card-info service-info">
-                        <h4><u>Eco-Friendly</u></h4>
-                        <p>Our scents,attars and other products are ecofrinedly and are designed keeping in minds the
-                            needs of natural resources in future </p>
-                    </div>
-                </div>
-                <div class="card service-card">
-                    <div class="card-info service-info">
-                        <h4><u>Best Services</u></h4>
-                        <p>We are india's leading perfume supplier brand.We are the first who developed Eco-Friendly
-                            perfumes.</p>
-                    </div>
-                </div>
+  <!-- GSAP (Optional) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" crossorigin="anonymous"></script>
 
-            </div>
-             <br><br><br><br><br>
+  <!-- Basic JavaScript for Hamburger Toggle -->
+  <script>
+    const hamburger = document.getElementById('hamburger');
+    const navList = document.querySelector('.nav-list');
 
-
-
-            <!--Sale section-->
-            <div class="sale celebrate">
-                <div class="glow1"></div>
-                <div class="glow2"></div>
-                <div class="sale-img">
-                    <img src="images/sale perfume.png" alt="">
-                </div>
-                <div class="sale-text">
-                    <h6>Celebrate Day Sale</h6>
-                    <h3>Save 25% Off On All Items Collection</h3>
-                    <a href="#"><button class="sale-btn">Shop Now</button></a>
-                </div>   
-            </div>
-
-            <!--Gallery Section -->
-            <div class="gallery-text">
-                <h2>Gallery</h2>
-            </div>
-            <div class="gallery">
-                <div class="gallery-row">
-                    <div class="gallery-card">
-                        <img src="/images/gallery1.jpg" alt="">
-                    </div>
-                    <div class="gallery-card">
-                        <img src="/images/gallery2.jpg" alt="">
-                    </div>
-                    <div class="gallery-card">
-                        <img src="/images/gallery3.jpg" alt="">
-                    </div>
-                    <div class="gallery-card">
-                        <img src="/images/gallery4.jpg" alt="">
-                    </div>
-                </div>
-                <div class="gallery-row">
-                    <div class="gallery-card">
-                        <img src="/images/gallery5.jpg" alt="">
-                    </div>
-                    <div class="gallery-card">
-                        <img src="/images/gallery6.jpg" alt="">
-                    </div>
-                    <div class="gallery-card">
-                        <img src="/images/gallery7.jpg" alt="">
-                    </div>
-                    <div class="gallery-card">
-                        <img src="/images/gallery8.jpg" alt="">
-                    </div>
-                </div>
-            </div>
-            <br><br><br><br>
-
-
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" integrity="sha512-onMTRKJBKz8M1TnqqDuGBlowlH0ohFzMXYRNebz+yOcc5TQr/zAKsthzhuv0hiyUKEiQEQXEynnXCvNTOk50dg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-           <script src="script.js"></script> 
+    hamburger.addEventListener('click', () => {
+      // Toggle nav-list visibility
+      if (navList.style.display === 'none' || navList.style.display === '') {
+        navList.style.display = 'flex';
+        navList.style.flexDirection = 'column';
+        navList.style.alignItems = 'center';
+      } else {
+        navList.style.display = 'none';
+      }
+    });
+  </script>
 </body>
-
 </html>
